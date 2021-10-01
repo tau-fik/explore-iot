@@ -1,0 +1,152 @@
+Membuat Grafik Dari Database Codeigniter 4
+Publish Date : 23 Apr 2020
+#Codeigniter4 #grafik
+
+Membuat Grafik Dari Database Codeigniter 4
+
+Grafik yang kita gunakan adalah highchart.js untuk versi offline bisa didownload langsung dari websitenya https://www.highcharts.com/blog/download/ .Kita akan menggunakan versi online.
+
+Paling tidak anda harus tau cara memasang dan menjalankan project codeigniter 4 jika ingin membaca tutorial ini.Jika belum paham bisa baca disini Instalasi Codeigniter 4.
+
+Pada grafik kita akan menampilkan data kasus corona di Indonesia sampai bulan April.Buat terlebih dahulu database ci4chart.Lalu download file sql ini dan import ke database ci4chart. File Sql Download Disini
+
+Kalau tidak paham cara import bisa dilihat disini Cara Import Dan Export
+
+Setelah membuat project baru codeigniter 4 jangan lupa ubah setting database di file .env
+
+Pastikan file env sudah ada titiknya .env karena secara default belum ada saat membuat project baru.
+
+Kemudian cari setting database seperti dibawah ini lalu sesuaikan:
+
+database.default.hostname = localhost
+database.default.database = ci4chart
+database.default.username = root
+database.default.password = root
+database.default.DBDriver = MySQLi
+
+Ubah juga mode CI_ENVIRONMENT menjadi development agar lebih mudah dalam proses debugging.
+Membuat Model
+
+Buat file baru bernama CoronaModel.php di folder app/Models/CoronaModel.php dan tulis kode dibawah.
+
+<?php namespace App\Models;
+use CodeIgniter\Model;
+class CoronaModel extends Model
+{
+	protected $table = 'corona';
+}
+
+Kalau yang kita pakai fungsi orm database bawaan codeigniter 4,tidak perlu membuat fungsi di Models.Hanya isi dengan nama tabel.
+Membuat Controller
+
+Kita akan pakai Controller Home ubah file di folder app/Controllers/Home.php dan isi dengan kode dibawah.
+
+<?php namespace App\Controllers;
+use App\Models\CoronaModel;
+
+class Home extends BaseController
+{
+	public function index()
+	{
+		$bulan = $this->request->getGet('bulan');
+		// jika tidak ada ambil bulan sekarang
+		$bulan = $bulan?$bulan:Date("m");
+
+		return view('index');
+	}
+	
+	public function apiData($bulan){
+		$corona = new CoronaModel();
+		$corona->where('tgl >=',"2020-{$bulan}-01");
+		$corona->where('tgl <=',"2020-{$bulan}-31");
+		$corona->orderBy('tgl','asc');
+		echo json_encode($corona->get()->getResult());
+	}
+}
+
+Di controller kita buat dua fungsi yang pertama index untuk menampilkan view,dan fungsi apiData untuk mengambil data dan mengembalikan dalam bentuk json.
+
+Karena kita akan mengambil data untuk grafik menggunakan ajax.
+Membuat View
+
+Buat file baru di bernama index.php di folder app/Views/index.php dan isi dengan kode dibawah.
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Aplikasi Chart Sederhana</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+</head>
+<body>
+	<div class="container mt-3">
+		<div class="row">
+			<div class="col-md-3">
+				<label for="">Pilih Bulan</label>
+				<select id="bulan" class="form-control">
+					<option value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+					<option value="4" selected="">4</option>
+				</select>
+			</div>
+		</div>
+	</div>
+	<div id="container"></div>
+	<script src="https://code.highcharts.com/highcharts.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.js"></script>
+	<script>
+	// Chart
+	const options = {
+	  chart: {
+	    type: 'spline',
+	    events: {
+	    	load: getData(4)
+	    }
+	  },
+	  title: {
+	    text: 'Corona Virus Indonesia'
+	  },
+		 xAxis: {
+		        type: 'datetime',
+		        dateTimeLabelFormats: {
+		            day: '%e of %b'
+		        }
+		},
+	  series: [
+	  	{
+	  		name:'Kasus',
+	  		data:[],
+	  		pointStart: Date.UTC(2020, 3, 1),
+	        pointInterval: 24 * 3600 * 1000 // one day
+	  	}
+	  ]
+	};
+	const chart = Highcharts.chart('container', options)
+
+	// Data
+	$("#bulan").change(function(){
+		const val = $(this).val();
+		getData(val);
+	})
+	function getData(bulan) {
+	  	const url = `/home/apiData/${bulan}`;
+	    $.getJSON(url,function(data) {
+	    	const p =[];
+			data.map((obj) => {
+			    p.push(parseInt(obj.jumlah))
+		    });
+			chart.series[0].update({
+				data:p,
+				pointStart: Date.UTC(2020, bulan-1, 1)
+			})
+			chart.redraw(); 
+		})
+	}
+	</script>	
+</body>
+</html>
+
+Di view kita menggunakan boostrap4,highchart.js dan jquery.Terdapat juga combo yang akan menampilkan data berdasarkan bulan yang dipilih.
+
+Setelah semua langkah selesai.Kemudian masuk ke folder project dari terminal/CMD kemudian ketikkan php spark serve dan bukan http://localhost:8080.
