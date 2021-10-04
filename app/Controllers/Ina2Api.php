@@ -11,7 +11,7 @@ class Ina2Api extends ResourceController
     {
         $this->modelIna2 = new Ina2Model;
     }
-    public function insert($volt,$arus)
+    public function insert($volt, $arus)
     {
         $data = [
             'data_volt' => $volt,
@@ -19,7 +19,7 @@ class Ina2Api extends ResourceController
         ];
         $this->modelIna2->save($data);
 
-        return $this->respond(['statuss'=>'data berhasil di tambahkan']);
+        return $this->respond(['statuss' => 'data berhasil di tambahkan']);
     }
 
     // ...

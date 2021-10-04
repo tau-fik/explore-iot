@@ -32,7 +32,7 @@ $routes->setAutoRoute(true);
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 $routes->get('/', 'Home::index');
-$routes->get('/logout', 'Login::logout');
+$routes->get('/Logout', 'Login::logout');
 $routes->get('/ina1/(:any)/(:any)', 'Ina1Api::insert/$1/$2');
 $routes->get('/ina2/(:any)/(:any)', 'Ina2Api::insert/$1/$2');
 $routes->get('/baterai/(:any)', 'BateraiApi::insert/$1');

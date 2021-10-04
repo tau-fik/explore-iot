@@ -11,7 +11,7 @@
    <?= $this->renderSection('css') ?>
 
    <?= $this->renderSection('js') ?>
-   
+
 
    <style type="text/css">
       body {
@@ -30,30 +30,30 @@
    <link href="http://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css">
 
    <script type="text/javascript">
-      $(document).ready(function () {
+      $(document).ready(function() {
 
-         $("#btn-blog-next").click(function () {
+         $("#btn-blog-next").click(function() {
             $('#blogCarousel').carousel('next')
          });
-         $("#btn-blog-prev").click(function () {
+         $("#btn-blog-prev").click(function() {
             $('#blogCarousel').carousel('prev')
          });
 
-         $("#btn-client-next").click(function () {
+         $("#btn-client-next").click(function() {
             $('#clientCarousel').carousel('next')
          });
-         $("#btn-client-prev").click(function () {
+         $("#btn-client-prev").click(function() {
             $('#clientCarousel').carousel('prev')
          });
 
       });
 
-      $(window).load(function () {
+      $(window).load(function() {
 
          $('.flexslider').flexslider({
             animation: "slide",
             slideshow: true,
-            start: function (slider) {
+            start: function(slider) {
                $('body').removeClass('loading');
             }
          });
@@ -78,9 +78,9 @@
          <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
                <li class="active"><a href="/"><i class="icon-home icon-white"></i> Home</a></li>
-               <li><a href="<?= base_url();?>/datatables"><i class="icon-th icon-white"></i> Tables</a></li>
-               <li><a href="<?= base_url();?>/datausers"><i class="icon-user icon-white"></i> Users</a></li>
-               <li><a href="<?= base_url();?>/logout"><i class="icon-user icon-white"></i> Logout</a></li>
+               <li><a href="<?= base_url(); ?>/DataTables"><i class="icon-th icon-white"></i> Tables</a></li>
+               <li><a href="<?= base_url(); ?>/DataUsers"><i class="icon-user icon-white"></i> Users</a></li>
+               <li><a href="<?= base_url(); ?>/Logout"><i class="icon-user icon-white"></i> Logout</a></li>
             </ul>
          </div>
          <!--/.nav-collapse -->
@@ -88,16 +88,16 @@
    </div>
 
    <div class="container">
-       <?= $this->renderSection('content') ?>
+      <?= $this->renderSection('content') ?>
    </div> <!-- /container -->
 
-   
+
    <div id="footerwrap">
       <footer class="clearfix"></footer>
       <div class="container">
          <div class="row">
             <div class="col-sm-12 col-lg-12">
-               <p><img src="<?= base_url();?>/template/images/logo.png" alt=""></p>
+               <p><img src="<?= base_url(); ?>/template/images/logo.png" alt=""></p>
                <p>Universitas Brawijaya - Explore IoT - Copyright 2021</p>
             </div>
 
