@@ -11,8 +11,6 @@
    <?= $this->renderSection('css') ?>
 
    <?= $this->renderSection('js') ?>
-
-
    <style type="text/css">
       body {
          padding-top: 60px;
@@ -105,6 +103,8 @@
       </div><!-- /container -->
    </div><!-- /footerwrap -->
 
+
+   <?= $this->renderSection('chart-js') ?>
 </body>
 
 </html>

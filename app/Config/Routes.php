@@ -37,8 +37,10 @@ $routes->get('/ina1/(:any)/(:any)', 'Ina1Api::insert/$1/$2');
 $routes->get('/ina2/(:any)/(:any)', 'Ina2Api::insert/$1/$2');
 $routes->get('/baterai/(:any)', 'BateraiApi::insert/$1');
 $routes->get('/anemometer/(:any)', 'AnemometerApi::insert/$1');
-
-
+$routes->get('/report/ina1', 'ExelReport::exelIna1');
+$routes->get('/report/ina2', 'ExelReport::exelIna2');
+$routes->get('/report/anemo', 'ExelReport::exelAnemo');
+$routes->get('/report/bat', 'ExelReport::exelBat');
 
 /*
  * --------------------------------------------------------------------
