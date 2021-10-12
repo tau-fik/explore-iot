@@ -12,6 +12,7 @@ class Home extends BaseController
 
     public function __construct()
     {
+        $this->statusLogin();
         $this->modelIna1 = new Ina1Model;
         $this->modelIna2 = new Ina2Model;
         $this->modelAnemo = new AnemometerModel;

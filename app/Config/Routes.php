@@ -32,15 +32,29 @@ $routes->setAutoRoute(true);
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 $routes->get('/', 'Home::index');
-$routes->get('/Logout', 'Login::logout');
+$routes->post('/login', 'Login::login');
+
 $routes->get('/ina1/(:any)/(:any)', 'Ina1Api::insert/$1/$2');
+$routes->delete('/ina1/(:any)', 'DataTables::ina1Delete/$1');
+
 $routes->get('/ina2/(:any)/(:any)', 'Ina2Api::insert/$1/$2');
-$routes->get('/baterai/(:any)', 'BateraiApi::insert/$1');
-$routes->get('/anemometer/(:any)', 'AnemometerApi::insert/$1');
+$routes->delete('/ina2/(:any)', 'DataTables::ina2Delete/$1');
+
+$routes->get('/bat/(:any)', 'BateraiApi::insert/$1');
+$routes->delete('/bat/(:any)', 'DataTables::batDelete/$1');
+
+$routes->get('/anemo/(:any)', 'AnemometerApi::insert/$1');
+$routes->delete('/anemo/(:any)', 'DataTables::anemoDelete/$1');
+
 $routes->get('/report/ina1', 'ExelReport::exelIna1');
 $routes->get('/report/ina2', 'ExelReport::exelIna2');
 $routes->get('/report/anemo', 'ExelReport::exelAnemo');
 $routes->get('/report/bat', 'ExelReport::exelBat');
+
+
+$routes->get('/reset/(:any)', 'DataUsers::reset/$1');
+$routes->delete('/datausers/(:any)', 'DataUsers::delete/$1');
+
 
 /*
  * --------------------------------------------------------------------

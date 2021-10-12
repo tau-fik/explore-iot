@@ -47,6 +47,14 @@ class BaseController extends Controller
 
         // Preload any models, libraries, etc, here.
 
-        // E.g.: $this->session = \Config\Services::session();
+        $this->session = \Config\Services::session();
+    }
+
+    public function statusLogin()
+    {
+        if (!session()->has("id")) {
+            header('Location: ' . base_url('/Login'));
+            return exit();
+        }
     }
 }

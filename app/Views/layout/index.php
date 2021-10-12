@@ -78,7 +78,7 @@
                <li class="active"><a href="/"><i class="icon-home icon-white"></i> Home</a></li>
                <li><a href="<?= base_url(); ?>/DataTables"><i class="icon-th icon-white"></i> Tables</a></li>
                <li><a href="<?= base_url(); ?>/DataUsers"><i class="icon-user icon-white"></i> Users</a></li>
-               <li><a href="<?= base_url(); ?>/Logout"><i class="icon-user icon-white"></i> Logout</a></li>
+               <li><a href="<?= base_url(); ?>/Login/logout"><i class="icon-user icon-white"></i> Logout</a></li>
             </ul>
          </div>
          <!--/.nav-collapse -->

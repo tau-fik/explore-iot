@@ -51,7 +51,15 @@
 						<td><?= $d['created_at']; ?></td>
 						<td><?= $d['data_volt']; ?></td>
 						<td><?= $d['data_arus']; ?></td>
-						<td class="center"></td>
+						<td class="center">
+							<?php if (session()->get('permision') === "admin") { ?>
+								<form action="/ina1/<?= $d['id'] ?>" method="POST" class="d-inline">
+									<?= csrf_field(); ?>
+									<input type="hidden" name="_method" value="DELETE">
+									<button type="submit" class="btn btn-danger badge rounded-pill" onclick="return confirm('Apakah anda yakin untuk di hapus.?')">Hapus</i></button>
+								</form>
+							<?php } ?>
+						</td>
 					</tr>
 				<?php endforeach ?>
 			</tbody>
@@ -87,7 +95,15 @@
 						<td><?= $d['created_at']; ?></td>
 						<td><?= $d['data_volt']; ?></td>
 						<td><?= $d['data_arus']; ?></td>
-						<td class="center"></td>
+						<td class="center">
+							<?php if (session()->get('permision') === "admin") { ?>
+								<form action="/ina2/<?= $d['id'] ?>" method="POST" class="d-inline">
+									<?= csrf_field(); ?>
+									<input type="hidden" name="_method" value="DELETE">
+									<button type="submit" class="btn btn-danger badge rounded-pill" onclick="return confirm('Apakah anda yakin untuk di hapus.?')">Hapus</i></button>
+								</form>
+							<?php } ?>
+						</td>
 					</tr>
 				<?php endforeach ?>
 			</tbody>
@@ -121,7 +137,15 @@
 						<td><?= $i++; ?></td>
 						<td><?= $d['created_at']; ?></td>
 						<td><?= $d['data_anemometer']; ?></td>
-						<td class="center"></td>
+						<td class="center">
+							<?php if (session()->get('permision') === "admin") { ?>
+								<form action="/anemo/<?= $d['id'] ?>" method="POST" class="d-inline">
+									<?= csrf_field(); ?>
+									<input type="hidden" name="_method" value="DELETE">
+									<button type="submit" class="btn btn-danger badge rounded-pill" onclick="return confirm('Apakah anda yakin untuk di hapus.?')">Hapus</i></button>
+								</form>
+							<?php } ?>
+						</td>
 					</tr>
 				<?php endforeach ?>
 			</tbody>
@@ -155,7 +179,15 @@
 						<td><?= $i++; ?></td>
 						<td><?= $d['created_at']; ?></td>
 						<td><?= $d['data_baterai']; ?></td>
-						<td class="center"></td>
+						<td class="center">
+							<?php if (session()->get('permision') === "admin") { ?>
+								<form action="/bat/<?= $d['id'] ?>" method="POST" class="d-inline">
+									<?= csrf_field(); ?>
+									<input type="hidden" name="_method" value="DELETE">
+									<button type="submit" class="btn btn-danger badge rounded-pill" onclick="return confirm('Apakah anda yakin untuk di hapus.?')">Hapus</i></button>
+								</form>
+							<?php } ?>
+						</td>
 					</tr>
 				<?php endforeach ?>
 			</tbody>
